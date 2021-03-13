@@ -2,12 +2,11 @@ import time
 import terminalio
 from adafruit_magtag.magtag import MagTag
  
-# in seconds, we can refresh about 100 times on a battery
+
 TIME_BETWEEN_REFRESHES = 60  # in seconds
-# Set up data location and fields
-desired_line = "42"
-desired_station = "Antonigasse"
-desired_richtung = "Schottentor"
+desired_line = "42" #necessary
+desired_station = "Antonigasse" #necessary
+desired_richtung = "Schottentor" #necessary
 DATA_SOURCE = "https://apps.static-access.net/ViennaTransport/monitor/?line=" + desired_line + "&station=" + desired_station +  "&towards=" + desired_richtung + "&countdown"
 STATION = [0,'station']
 LINIE = [0,'line']
@@ -15,7 +14,7 @@ RICHTUNG = [0,'towards']
 COUNTDOWN1 = [0,'countdown',0]
 COUNTDOWN2 = [0,'countdown',1]
 
- 
+
 def station_transform(val):
     if val == None:
         val = "Unavailable"
@@ -41,7 +40,7 @@ def countdown2_transform(val5):
         val5 = "Unavailable"
     return val5
  
-# Set up the MagTag with the JSON data parameters
+# JSON data parameters
 magtag = MagTag(
     url=DATA_SOURCE,
     json_path=(STATION, LINIE, RICHTUNG, COUNTDOWN1, COUNTDOWN2)
@@ -61,7 +60,6 @@ magtag.add_text(
     text_position=(40, 40),
     text_transform=line_transform
 )
-
 
 # STATION
 magtag.add_text(
